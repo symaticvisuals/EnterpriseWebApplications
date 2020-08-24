@@ -1,5 +1,6 @@
 package QueuePrograms;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.PriorityQueue;
 
@@ -26,7 +27,13 @@ public class PriorityQues {
             System.out.print(itr.next()+" ");
         }
 
-        PriorityQueue<String>pqueue = new PriorityQueue<>();
+        Comparator<String> stringlength = new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.length()-o2.length();
+            }
+        };
+        PriorityQueue<String>pqueue = new PriorityQueue<>(stringlength);
         pqueue.add("John");
         pqueue.add("Ram");
         pqueue.add("Harry");
@@ -35,6 +42,16 @@ public class PriorityQues {
         pqueue.add("Anjali");
         System.out.println();
         System.out.println(pqueue);
+
+        PriorityQueue<String>Lqueue = new PriorityQueue<>();
+        Lqueue.add("John");
+        Lqueue.add("Ram");
+        Lqueue.add("Harry");
+        Lqueue.add("Anuj");
+        Lqueue.add("Kartik");
+        Lqueue.add("Anjali");
+        System.out.println();
+        System.out.println(Lqueue);
 
     }
 }
