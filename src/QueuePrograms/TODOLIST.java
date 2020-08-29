@@ -17,14 +17,19 @@ public class TODOLIST  {
         System.out.print("Enter No. of tasks: ");
         int n = s.nextInt();
         while(n-->0) {
-            queue.add(new Task(s));
+            System.out.print("Enter Priority: ");
+            int priority=s.nextInt();
+            System.out.print("Enter Description: ");
+            String desicription = s.next();
+
+            queue.add(new Task(priority,desicription));
         }
 
-        //Stack<Task> stack = sortQueue(queue);
-//        for (Task task:stack) {
-//            System.out.print(task.getPriority()+" ");
-//            System.out.println(task.getDescription());
-//        }
+        Stack<Task> stack = sortQueue(queue);
+        for (Task task:stack) {
+            System.out.print(task.getPriority()+" ");
+            System.out.println(task.getDescription());
+        }
 
     }
 
@@ -64,7 +69,7 @@ public class TODOLIST  {
     }
 
 
-    static class Task
+    public static class Task implements Comparable
     {
         int priority;
         String description;
@@ -77,12 +82,18 @@ public class TODOLIST  {
             return description;
         }
 
-        public Task(Scanner s) {
+        public Task(int priority, String description) {
             //System.out.print("Enter task Priority: ");
-            this.priority =s.nextInt();
+            this.priority = priority;
             //System.out.print("Enter Description: ");
-            this.description = s.next();
+            this.description = description;
         }
 
+
+
+        @Override
+        public int compareTo(Object o) {
+            return 0;
+        }
     }
 }
