@@ -12,11 +12,30 @@ public class TODOLIST  {
     public static void main(String[] args) {
 
         Scanner s = new Scanner(System.in);
+        Comparator<Task>  pri= new Comparator<Task>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                if(o1.getPriority() < o2.getPriority())
+                {
+                    return -1;
+                }
+                else if (o1.getPriority() > o2.getPriority())
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        };
 
-        PriorityQueue<Task> queue = new PriorityQueue<>();
-        System.out.print("Enter No. of tasks: ");
-        int n = s.nextInt();
-        while(n-->0) {
+
+
+        PriorityQueue<Task> queue = new PriorityQueue<>(pri);
+
+        int n =9;
+        while(n-- > 0) {
             System.out.print("Enter Priority: ");
             int priority=s.nextInt();
             System.out.print("Enter Description: ");
@@ -25,75 +44,24 @@ public class TODOLIST  {
             queue.add(new Task(priority,desicription));
         }
 
-        Stack<Task> stack = sortQueue(queue);
-        for (Task task:stack) {
-            System.out.print(task.getPriority()+" ");
-            System.out.println(task.getDescription());
+        System.out.println("Want to add more?(Enter 0 for no 1 for yes)");
+        int choice = s.nextInt();
+        while (choice!=0){
+            System.out.print("Enter Priority: ");
+            int priority=s.nextInt();
+            System.out.print("Enter Description: ");
+            String desicription = s.next();
+            queue.remove();
+            queue.add(new Task(priority,desicription));
+
+            System.out.println("Want to add more?(Enter 0 for no 1 for yes)");
+            choice = s.nextInt();
         }
+        System.out.println(queue);
+
 
     }
 
-    private static Stack<Task> sortQueue(PriorityQueue<Task> queue) {
-        Stack<Task> stack = new Stack<>();
-        while(!queue.isEmpty())
-        {
-            Iterator<Task> itr = queue.iterator();
+//
 
-            if(itr.next().equals(getMax(queue)))
-            {
-            stack.push(getMax(queue));
-            queue.remove(getMax(queue));
-            }
-        }
-        return stack;
-    }
-
-    private static Task getMax(Queue<Task> queue) {
-        int max= Integer.MIN_VALUE;
-        for(Task task:queue)
-        {
-            if(task.getPriority()>max)
-            {
-                max= task.getPriority();
-            }
-        }
-        for(Task task:queue)
-        {
-            if(task.getPriority()==max)
-            {
-                return task;
-            }
-        }
-
-        return null;
-    }
-
-
-    public static class Task implements Comparable
-    {
-        int priority;
-        String description;
-
-        public int getPriority() {
-            return priority;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public Task(int priority, String description) {
-            //System.out.print("Enter task Priority: ");
-            this.priority = priority;
-            //System.out.print("Enter Description: ");
-            this.description = description;
-        }
-
-
-
-        @Override
-        public int compareTo(Object o) {
-            return 0;
-        }
-    }
 }

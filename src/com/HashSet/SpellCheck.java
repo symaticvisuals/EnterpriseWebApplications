@@ -18,24 +18,15 @@ public class SpellCheck {
         }
         File spellcheck = new File("input");
         Scanner spell = new Scanner(spellcheck);
-        while (s.hasNext())
+        HashSet<String> spells = new HashSet<>();
+        while (spell.hasNext())
         {
-            spellchecking(spell.next(),words);
-        }
-    }
-
-    private static String spellchecking(String nex, HashSet<String> words) {
-        ArrayList<String> matches = new ArrayList<>();
-        Iterator<String> itr = words.iterator();
-        int i=0;
-        while (itr.hasNext())
-        {
-
-            String match = itr.next();
-            //if(match.startsWith(nex.charAt(i)))
+            if(words.contains(s.next()))
             {
-
+                System.out.println();
             }
         }
     }
+
+
 }
